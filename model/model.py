@@ -50,7 +50,7 @@ class Model:
     def get_generi(self):
         """Restituisce la lista di tutti i generi."""
         # TODO
-        #prendo la lista dei libri
+        #prendo la lista dei libri dal dao
         lista_libri=[]
         libri= self._libro_dao.tot_libri()
         if libri is not None:
@@ -66,7 +66,7 @@ class Model:
     def get_biblioteche(self):
         """ Restituisce la lista di tutte le biblioteche."""
         # TODO
-        # predo i dati dal dao e li restituisco
+        # predo i dati dal dao e li restituisco direttamente perché sono già come in lista
 
         biblioteche= self._biblioteca_dao.tot_biblioteche()
 

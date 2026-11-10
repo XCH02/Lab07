@@ -21,26 +21,25 @@ class Controller:
     # TODO
     def popola_dropdown(self):
         #aggiungo opzione nessun filtro
-        self._view.filtraggio_biblioteca.options.append(ft.dropdown.Option("Nessun filtro"))
-        #prendo la lista
+        self._view.filtraggio_biblioteca.options.append(ft.DropdownOption("Nessun filtro"))
+        #prendo il contenitore di biblioteche
         biblioteche = self._model.get_biblioteche()
-
+        #itero biblioteca su biblioteche e appendo il nome della biblioteca
         for b in biblioteche:
             self._view.filtraggio_biblioteca.options.append(ft.DropdownOption(b.nome))
-
+        #stessa cosa qui
         self._view.filtraggio_genere.options.append(ft.DropdownOption("Nessun filtro"))
 
         generi= self._model.get_generi()
-
         for g in generi:
             self._view.filtraggio_genere.options.append(ft.DropdownOption(g))
-
 
         self._view.update()
 
 
     # CALLBACKS DROPDOWN
     # TODO
+    #richiamo della funzione per salvare la scelta dell'utente
     def sel_biblioteca(self,e):
         self.biblioteca_selezionata = (self._view.filtraggio_biblioteca.value)
     def sel_genere(self,e):
