@@ -19,9 +19,45 @@ class Controller:
 
     # POPOLA DROPDOWN
     # TODO
+    def popola_dropdown(self):
+        #aggiungo opzione nessun filtro
+        self._view.filtraggio_biblioteca.options.append(ft.dropdown.Option("Nessun filtro"))
+        #prendo la lista
+        biblioteche = self._model.get_biblioteche()
+
+        for b in biblioteche:
+            self._view.filtraggio_biblioteca.options.append(ft.DropdownOption(b.nome))
+
+        self._view.filtraggio_genere.options.append(ft.DropdownOption("Nessun filtro"))
+
+        generi= self._model.get_generi()
+
+        for g in generi:
+            self._view.filtraggio_genere.options.append(ft.DropdownOption(g))
+
+
+        self._view.update()
+
 
     # CALLBACKS DROPDOWN
     # TODO
+    def sel_biblioteca(self,e):
+        self.biblioteca_selezionata = (self._view.filtraggio_biblioteca.value)
+    def sel_genere(self,e):
+        self.genere_selezionato = (self._view.filtraggio_genere.value)
 
     # AZIONE: MOSTRA LIBRI
     # TODO
+    def mostra_libri(self,e):
+        self._view.list_view.controls.clear()
+
+        libri= self._model.get_libri_filtrati(self.biblioteca_selezionata,
+                                             self.genere_selezionato)
+        if libri is None or len(libri) == 0:
+            self._view.show_alert("Nessun libro trovato")
+        for l in libri:
+            self._view.list_view.controls.append(ft.Text(f"{l}"))
+
+        self._view.update()
+
+

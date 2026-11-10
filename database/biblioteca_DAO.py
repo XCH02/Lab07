@@ -11,3 +11,26 @@ class BibliotecaDAO:
         pass
 
     # TODO
+
+    def tot_biblioteche(self):
+
+        cnx=DBConnect.get_connection()
+
+        if cnx is None:
+            print("Connessione non stabilita")
+            return None
+        else:
+            query= "SELECT * FROM biblioteca"
+
+            cursor = cnx.cursor(dictionary = True)
+            cursor.execute(query)
+            risultato_biblioteche=[]
+            for row in cursor:
+                biblioteche=Biblioteca(row["id"], row["nome"], row["indirizzo"])
+                risultato_biblioteche.append(biblioteche)
+
+            cursor.close()
+            cnx.close()
+            return risultato_biblioteche
+
+

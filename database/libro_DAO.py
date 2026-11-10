@@ -11,3 +11,32 @@ class LibroDAO:
         pass
 
     # TODO
+
+    def tot_libri(self):
+
+
+        cnx=DBConnect.get_connection()
+        #gestisco errore connesione
+        if cnx is None:
+            print("Connessione non stabilita")
+        else:
+            #creo la connesione
+            cursor=cnx.cursor(dictionary=True)
+            query= "SELECT * FROM libro"
+            cursor.execute(query)
+
+            risultato_libri=[]
+
+            for row in cursor:
+                libri=Libro(row["id"],
+                            row["titolo"],
+                            row["autore"],
+                            row["genere"],
+                            row["anno_pubblicazione"],
+                            row["id_biblioteca"])
+                risultato_libri.append(libri)
+
+            cursor.close()
+            cnx.close()
+            return risultato_libri
+
